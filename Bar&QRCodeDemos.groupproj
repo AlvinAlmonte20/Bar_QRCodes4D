@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{9E6D58E3-50B8-4BDA-A3E5-85015BC79B93}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="DemoQRCode\QRCodeDemo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="DemoBarCode\BarcodeDemo.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="QRCodeDemo">
+        <MSBuild Projects="DemoQRCode\QRCodeDemo.dproj"/>
+    </Target>
+    <Target Name="QRCodeDemo:Clean">
+        <MSBuild Projects="DemoQRCode\QRCodeDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="QRCodeDemo:Make">
+        <MSBuild Projects="DemoQRCode\QRCodeDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="BarcodeDemo">
+        <MSBuild Projects="DemoBarCode\BarcodeDemo.dproj"/>
+    </Target>
+    <Target Name="BarcodeDemo:Clean">
+        <MSBuild Projects="DemoBarCode\BarcodeDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="BarcodeDemo:Make">
+        <MSBuild Projects="DemoBarCode\BarcodeDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="QRCodeDemo;BarcodeDemo"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="QRCodeDemo:Clean;BarcodeDemo:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="QRCodeDemo:Make;BarcodeDemo:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
